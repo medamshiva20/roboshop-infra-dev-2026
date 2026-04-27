@@ -1,12 +1,12 @@
 terraform{
-    rquired_providers{
+    required_providers{
         aws = {
             source = "hashicorp/aws"
             version = "6.33.0"
         }
     }
     bucket "s3"{
-        bucket = "remote-state-aws-88s-dev"
+        bucket = "remote-state-aws-88s-development"
         key = "roboshop-dev-vpc"
         region = "us-east-1"
         encrypt = true
