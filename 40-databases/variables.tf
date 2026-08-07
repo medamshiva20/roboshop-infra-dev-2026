@@ -1,12 +1,12 @@
 variable "project"{
-    type = "string"
+    type = string
 }
 
 variable "environment"{
-    type = "string"
+    type = string
 }
 
 variable "instance_type"{
-    type = "string"
+    type = string
     default = "t2.micro"
 }
