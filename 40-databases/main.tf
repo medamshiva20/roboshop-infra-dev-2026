@@ -29,7 +29,7 @@ resource "terraform_data" "bootstrap"{
         destination = "/tmp/bootstrap.sh"
     }
 
-    provisioner "remote_exec"{
+    provisioner "remote-exec"{
         inline = [
             "sudo chmod +x /tmp/bootstrap.sh",
             "sudo sh /tmp/bootstrap.sh"
