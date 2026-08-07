@@ -1,5 +1,5 @@
 variable "project"{
-    type = "String"
+    type = "string"
 }
 
 variable "environment"{
