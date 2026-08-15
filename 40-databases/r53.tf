@@ -13,3 +13,11 @@ resource "aws_route53_record" "redis"{
     name = "redis.${var.domain_name}"
     records = [aws_instance.redis.private_ip]
 }
+
+resource "aws_route53_record" "mysql"{
+    zone_id = var.zone_id
+    name = mysql.${var.domain_name}
+    ttl = "1"
+    type = "A"
+    records = [aws_instance.mysql.private_ip]
+}
