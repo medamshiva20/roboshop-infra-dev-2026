@@ -65,7 +65,9 @@ resource "aws_instance" "redis"{
         destination = "/tmp/bootstrap.sh"
     }
     provisioner "remote-exec"{
+        inline = [
         "sudo chmod +x /tmp/bootstrap.sh",
         "sudo sh /tmp/bootstrap.sh redis"
+        ]
     }
  }
