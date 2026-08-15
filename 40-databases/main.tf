@@ -76,7 +76,7 @@ resource "aws_instance" "redis"{
     ami = local.ami_id
     instance_type = var.instance_type
     subnet_id = local.database_subnet_id
-    vpc_security_group_ids = local.mysql_sg_id
+    vpc_security_group_ids = [local.mysql_sg_id]
 
     tags = merge (
         local.common_tags,
