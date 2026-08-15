@@ -10,6 +10,6 @@ resource "aws_route53_record" "redis"{
     zone_id = var.zone_id
     type = "A"
     ttl = "1"
-    name = redis.${var.domain_name}
+    name = "redis.${var.domain_name}"
     records = [aws_instance.redis.private_ip]
 }
