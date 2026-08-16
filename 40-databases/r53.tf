@@ -27,5 +27,5 @@ resource "aws_route53_record" "rabbitmq"{
     name = "rabbitmq.${var.domain_name}"
     ttl = "1"
     type = "A"
-    record = [aws_instance.rabbitmq.private_ip]
+    records = [aws_instance.rabbitmq.private_ip]
 }
