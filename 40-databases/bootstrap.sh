@@ -3,6 +3,7 @@
 dnf install ansible -y 
 
 component=$1
+environment=$2
 
 cd /home/ec2-user/
 
@@ -13,4 +14,4 @@ cd ansible-roboshop-roles-tf-2026
 
 git pull
 
-ansible-playbook -e component=$component roboshop.yaml
+ansible-playbook -e component=$component -e env=$environment roboshop.yaml
