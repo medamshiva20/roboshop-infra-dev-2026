@@ -144,7 +144,9 @@ resource "aws_instance" "redis"{
     }
 
     provisioner "remote-exec"{
+        inline = [
         "sudo chmod +x /tmp/bootstrap.sh",
         "sudo sh /tmp/bootstrap.sh rabbitmq dev"
+        ]
     }
  }
