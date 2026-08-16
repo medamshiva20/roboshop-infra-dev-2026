@@ -21,3 +21,11 @@ resource "aws_route53_record" "mysql"{
     type = "A"
     records = [aws_instance.mysql.private_ip]
 }
+
+resource "aws_route53_record" "rabbitmq"{
+    zone_id = var.zone_id
+    name = "rabbitmq.${var.domain_name}"
+    ttl = "1"
+    type = "A"
+    record = [aws_instance.rabbitmq.private_ip]
+}
