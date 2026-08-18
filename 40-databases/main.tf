@@ -107,7 +107,7 @@ resource "aws_instance" "redis"{
     provisioner "remote-exec"{
         inline = [
             "sudo chmod +x /tmp/bootstrap.sh",
-            "sudo sh /tmp/bootstrap.sh mysql ${var.environment}"
+            "sudo sh /tmp/bootstrap.sh mysql ${var.env}"
         ]
     }
  }
