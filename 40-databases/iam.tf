@@ -30,7 +30,7 @@ resource "aws_iam_policy" "mysql"{
     description = "A policy for MySQL Ec2 instance"
     policy = templatefile("mysql-iam-policy.json",
     {
-         environment = var.environment
+         env = var.env
     })
 }
 
@@ -40,6 +40,6 @@ resource "aws_iam_role_policy_attachment" "mysql"{
 }
 
 resource "aws_iam_instance_profile" "mysql"{
-    name = "${var.project}-${var.environment}-mysql"
+    name = "${var.project}-${var.env}-mysql"
     role = aws_iam_role.mysql.name
 }

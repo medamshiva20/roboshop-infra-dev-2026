@@ -7,7 +7,7 @@ resource "aws_instance" "mongodb"{
     tags = merge(
         local.common_tags,
         {
-            name = "${var.project}-${var.environment}-mongodb"
+            name = "${var.project}-${var.env}-mongodb"
         }
     )
 }
@@ -46,7 +46,7 @@ resource "aws_instance" "redis"{
     tags = merge(
         local.common_tags,
         {
-            Name = "${var.project}-${var.environment}-redis"
+            Name = "${var.project}-${var.env}-redis"
         }
     )
 }
@@ -82,7 +82,7 @@ resource "aws_instance" "redis"{
     tags = merge (
         local.common_tags,
         {
-            Name = "${var.project}-${var.environment}-mysql"
+            Name = "${var.project}-${var.env}-mysql"
         }
     )
  }
@@ -107,7 +107,7 @@ resource "aws_instance" "redis"{
     provisioner "remote-exec"{
         inline = [
             "sudo chmod +x /tmp/bootstrap.sh",
-            "sudo sh /tmp/bootstrap.sh mysql ${var.environment}"
+            "sudo sh /tmp/bootstrap.sh mysql ${var.env}"
         ]
     }
  }
@@ -121,7 +121,7 @@ resource "aws_instance" "redis"{
     tags = merge(
         local.common_tags,
         {
-            Name = "${var.project}-${var.environment}-rabbitmq"
+            Name = "${var.project}-${var.env}-rabbitmq"
         }
     )
  }
