@@ -14,4 +14,4 @@ cd ansible-roboshop-roles-tf-2026
 
 git pull
 
-ansible-playbook -e component=$component -e environment=$env roboshop.yaml
+ansible-playbook -e component=$component -e env=$env roboshop.yaml
