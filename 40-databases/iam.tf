@@ -30,7 +30,7 @@ resource "aws_iam_policy" "mysql"{
     description = "A policy for MySQL Ec2 instance"
     policy = templatefile("mysql-iam-policy.json",
     {
-         environment = var.environment
+         env = var.env
     })
 }
 
