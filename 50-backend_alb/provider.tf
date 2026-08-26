@@ -1,0 +1,15 @@
+terraform{
+    required_providers{
+        aws = {
+            source = "hashicorp/aws"
+            version = "6.33.0"
+        }
+    }
+    backend "s3"{
+        bucket = "remote-state-aws-88s-development22"
+        key = "roboshop-backend-alb.tfstate"
+        region = "us-east-1"
+        encrypt = "true"
+        use_lockfile = "true"
+    }
+}
