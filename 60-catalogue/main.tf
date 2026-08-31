@@ -17,7 +17,7 @@ resource "terraform_data" "catalogue"{
         aws_instance.catalogue.id
     ]
 
-    connection = {
+    connections = {
         type = "ssh"
         user = "ec2-user"
         password = "DevOps321"
