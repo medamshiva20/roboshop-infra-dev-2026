@@ -2,17 +2,17 @@ data "aws_ami" "sivadevops"{
     most_recent = true
     owners = ["166044977463"]
 
-    filter{
+    filter {
         name = "name"
         values = ["Siva_AMI"]
     }
 
-    filter{
-        name = "root-block-device"
+    filter {
+        name = "root-device-type"
         values = ["ebs"]
     }
 
-    filter{
+    filter {
         name = "virtualization-type"
         values = ["hvm"]
     }
