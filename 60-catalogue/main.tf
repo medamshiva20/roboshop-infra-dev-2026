@@ -55,3 +55,23 @@ resource "aws_ami_from_instance" "catalogue"{
         }
     )
 }
+
+resource "aws_lb_target_group" "catalogue"{
+    Name = "${var.project}-${var.environment}-catalogue"
+    protocol = "HTTP"
+    port = 8080
+    vpc_id = local.vpc_id
+    deregistration_delay = 60
+    
+    health_check{
+        protocol = "HTTP"
+        port = 8080
+        path = "/health"
+        healthy_threshold = 2
+        unhealthy_threshold =2
+        timeout = 5
+        interval = 10
+        matcher = "200-299"
+    }
+}
+
