@@ -65,8 +65,8 @@ resource "aws_lb_target_group" "catalogue"{
     
     health_check{
         protocol = "HTTP"
-        port = 8080
         path = "/health"
+        port = 8080
         healthy_threshold = 2
         unhealthy_threshold =2
         timeout = 5
@@ -75,3 +75,46 @@ resource "aws_lb_target_group" "catalogue"{
     }
 }
 
+resource "aws_launch_template" "catalogue"{
+    name = "${var.project}-${var.environment}-catalogue"
+    image_id = aws_ami_from_instance.catalogue.id
+
+    # once autoscaling sees less traffic, it will terminate the instance
+    instance_initiated_shutdown_behaviour = "terminate"
+    instance_type = var.instance_type
+    vpc_security_group_ids = [local.catalogue_sg_id]
+
+    # each time we apply terraform this version will be updated as default
+    update_default_version = true   
+
+    tag_specifications {
+        resource_type = "instance"
+
+        tags = merge(
+            {
+                Name = "${var.project}-${var.environment}-catalogue"
+            },
+            local.common_tags
+        )
+    }
+
+    tag_specifications {
+        resource_type = "volume"
+
+        tags = merge(
+            local.common_tags,
+            {
+                Name = "${var.project}-${var.environment}-catalogue"
+            }
+        )
+    }
+
+    # tags for launch template
+    tags = merge(
+        local.common_tags,
+        {
+            Name = "${var,project}-${var.environment}-catalogue"
+        }
+    )
+
+}
