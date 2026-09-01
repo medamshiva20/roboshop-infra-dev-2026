@@ -57,7 +57,7 @@ resource "aws_ami_from_instance" "catalogue"{
 }
 
 resource "aws_lb_target_group" "catalogue"{
-    Name = "${var.project}-${var.environment}-catalogue"
+    name = "${var.project}-${var.environment}-catalogue"
     protocol = "HTTP"
     port = 8080
     vpc_id = local.vpc_id
