@@ -75,46 +75,45 @@ resource "aws_lb_target_group" "catalogue"{
     }
 }
 
-resource "aws_launch_template" "catalogue"{
-    name = "${var.project}-${var.environment}-catalogue"
-    image_id = aws_ami_from_instance.catalogue.id
+resource "aws_launch_template" "catalogue" {
+  name = "${var.project}-${var.environment}-catalogue"
+  image_id = aws_ami_from_instance.catalogue.id
 
-    # once autoscaling sees less traffic, it will terminate the instance
-    instance_initiated_shutdown_behavior = "terminate"
-    instance_type = var.instance_type
-    vpc_security_group_ids = [local.catalogue_sg_id]
+  # once autoscaling sees less traffic, it will terminate the instance
+  instance_initiated_shutdown_behavior = "terminate"
+  instance_type = "t2.micro"
+  vpc_security_group_ids = [local.catalogue_sg_id]
 
-    # each time we apply terraform this version will be updated as default
-    update_default_version = true   
+  # each time we apply terraform this version will be updated as default
+  update_default_version = true
+  
+  # tags for instances created by launch template through autoscaling
+  tag_specifications {
+    resource_type = "instance"
 
-    tag_specifications {
-        resource_type = "instance"
-
-        tags = merge(
-            {
-                Name = "${var.project}-${var.environment}-catalogue"
-            },
-            local.common_tags
-        )
-    }
-
-    tag_specifications {
-        resource_type = "volume"
-
-        tags = merge(
-            local.common_tags,
-            {
-                Name = "${var.project}-${var.environment}-catalogue"
-            }
-        )
-    }
-
-    # tags for launch template
     tags = merge(
-        local.common_tags,
         {
             Name = "${var.project}-${var.environment}-catalogue"
-        }
+        },
+        local.common_tags
     )
+  }
+  # tags for volumes created by instances
+  tag_specifications {
+    resource_type = "volume"
 
+    tags = merge(
+        {
+            Name = "${var.project}-${var.environment}-catalogue"
+        },
+        local.common_tags
+    )
+  }
+  # tags for launch template
+  tags = merge(
+        {
+            Name = "${var.project}-${var.environment}-catalogue"
+        },
+        local.common_tags
+    )
 }
