@@ -160,3 +160,17 @@ resource "aws_autoscaling_group" "catalogue"{
        delete = "15m"
       }
 }
+
+resource "aws_autoscaling_policy" "catalogue"{
+    autoscaling_group_name = aws_autoscaling_group.catalogue.name
+    name = "${var.project}-${var.environment}-catalogue"
+    policy_type = "TargetTrackingScaling"
+
+    target_tracking_configuration{
+        predefined_metric_specification{
+            predefined_metric_type = "ASGAverageCPUUtilization"
+        }
+
+        target_value = 70.0
+    }
+}
