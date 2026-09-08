@@ -17,3 +17,7 @@ variable "domain_name"{
     type = string
     default ="sivadevops.in"
 }
+
+variable "app_version"{
+    default = "v3"
+}

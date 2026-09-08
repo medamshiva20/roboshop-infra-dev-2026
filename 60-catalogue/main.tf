@@ -32,7 +32,7 @@ resource "terraform_data" "catalogue"{
     provisioner "remote-exec"{
         inline = [
             "sudo chmod +x /tmp/bootstrap.sh",
-            "sudo sh /tmp/bootstrap.sh catalogue dev"
+            "sudo sh /tmp/bootstrap.sh catalogue ${{var.environment}} ${{var.app_version}}"
         ]
     }
 }
@@ -175,7 +175,7 @@ resource "aws_autoscaling_policy" "catalogue"{
         target_value = 70.0
     }
 }
-
+#This depends on target group
 resource "aws_lb_listener_rule" "catalogue"{
     listener_arn = local.backend_alb_listener_arn
     priority = 10
