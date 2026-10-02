@@ -1,5 +1,5 @@
 resource "aws_acm_certificate" "roboshop"{
-    domain_name = "*.${domain_name}"
+    domain_name = "*.${var.domain_name}"
     validation_method = "DNS"
 
     tags = merge(
@@ -24,13 +24,13 @@ resource "aws_route53_record" "roboshop"{
 
     allow_overwrite = true
     name = each.value.name
-    record = each.value.record
+    records = [each.value.record]
     type = each.value.type
     ttl = 60
     zone_id = var.zone_id
 }
 
-resource "aws_acm_certificate_validation" "roboshop{
+resource "aws_acm_certificate_validation" "roboshop"{
     certificate_arn = aws_acm_certificate.roboshop.arn
-    validation_record_qdns = [ for record in aws_route53_record.roboshop : record.fqdn ]
+    validation_record_fqdns = [ for record in aws_route53_record.roboshop : record.fqdn ]
 }

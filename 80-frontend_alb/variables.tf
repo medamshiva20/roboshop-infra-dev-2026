@@ -9,8 +9,8 @@ variable "environment"{
 }
 
 variable "zone_id"{
-    type = string 
-    default = "Z03581561SPEVGQMXKW9P"
+    type = string
+    default = Z03581561SPEVGQMXKW9P
 }
 
 variable "domain_name"{
