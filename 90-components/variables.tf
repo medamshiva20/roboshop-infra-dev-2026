@@ -2,10 +2,6 @@ variable "components"{
     type = map
     default = {
         # backend components are attaching to backend ALB
-        catalogue = {
-            rule_priority = 10
-        }
-
         user = {
             rule_priority = 20
         }
