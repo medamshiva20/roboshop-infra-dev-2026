@@ -21,5 +21,11 @@ variable "components"{
         payment = {
             rule_priority = 50
         }
+
+
+        #Frontend rule
+        frontend = {
+            rule_priority = 10
+        }
     }
 }
