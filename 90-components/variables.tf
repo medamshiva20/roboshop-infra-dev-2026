@@ -21,7 +21,7 @@ variable "components"{
 
         #Frontend rule
         frontend = {
-            rule_priority = 10
+            rule_priority = 60
         }
     }
 }
