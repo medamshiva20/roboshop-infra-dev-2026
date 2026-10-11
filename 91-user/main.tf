@@ -178,7 +178,7 @@ resource "aws_autoscaling_policy" "user"{
 #This depends on target group
 resource "aws_lb_listener_rule" "user"{
     listener_arn = local.backend_alb_listener_arn
-    priority = 10
+    priority = 20
 
     action {
         type = "forward"
